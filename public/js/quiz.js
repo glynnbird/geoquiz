@@ -50,13 +50,6 @@ $.ajax({url: "/js/world.json",
           renderGeoJSON(data, greyStyle);
         }
       });
-
-$.ajax({url: "/js/us.json",
-        success: function(data) {
-          //console.log(data);
-          renderGeoJSON(data, plainStyle);
-        }
-      });
       
 var fetchStateNames = function() {
   $.ajax({url: "https://reader.cloudant.com/usstates/_design/fetch/_view/byName",
@@ -70,6 +63,15 @@ var fetchStateNames = function() {
   
 } ;     
       
+var jsonToTable = function(d) {
+  var table = "<table>";
+  for(var i in d) {
+    table += "<tr><th>"+i+"</th><td>"+d[i]+"</td></tr>";
+  }
+  table += "</table>";
+  return table;
+}      
+      
       
 var renderState = function(state) {
   $.ajax({url: "https://reader.cloudant.com/usstates/" + encodeURIComponent(state),
@@ -77,7 +79,8 @@ var renderState = function(state) {
             data = JSON.parse(data);
             renderGeoJSON(data, fancyStyle);
             console.log(data.properties);
-            $('#info').html("<pre>" + JSON.stringify(data.properties, null, " ") + "</pre>")
+            $("#info").html(jsonToTable(data.properties));
+    //        $('#info').html("<pre>" + JSON.stringify(data.properties, null, " ") + "</pre>")
           }
         });  
 }

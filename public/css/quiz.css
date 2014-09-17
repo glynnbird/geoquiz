@@ -22,8 +22,14 @@ html, body, #map {
 #score {
   display:block;
   font-size: 24px;
+  font-weight:bold;
 }
 
 #info {
   margin-left:15px;
+}
+
+th { 
+  text-align: right;
+  padding-right:10px;
 }
