@@ -1,6 +1,9 @@
 var zoomLevel = 4;
 var states = { };
 var mystates = [];
+var started= false;
+var elapsed = 0;
+var timer = null;
 
 var options = {
   zoomControl: false,
@@ -90,6 +93,10 @@ var renderScore = function() {
 }
 
 var checkState = function(s) {
+  if(!started) {
+    started = true;
+    startTimer();
+  }
   s = s.toLowerCase();
   var i = mystates.indexOf(s);
   if(i > -1) {
@@ -101,8 +108,39 @@ var checkState = function(s) {
       $('#state').val("");
       renderScore();
     }
+    if (mystates.length == Object.keys(states).length) {
+      stopTimer();
+      alert("Quiz complete");
+    }
   }
 }
+
+var pad = function(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
+}
+
+var renderTimer  = function() {
+  var s = elapsed % 60;
+  var m = Math.floor(elapsed / 60);
+  $('#timer').html(pad(m,2)+":"+pad(s,2));
+}
+
+var startTimer = function() {
+  renderScore();
+  elapsed = 0;
+  renderTimer();
+  timer = setInterval(function() {
+    elapsed++;
+    renderTimer();
+  },1000);
+}
+
+var stopTimer = function() {
+  clearInterval(timer);
+  timer = null;
+};
 
 var stateChange = function() {
   //console.log("!!!");

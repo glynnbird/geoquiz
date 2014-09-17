@@ -19,10 +19,29 @@ html, body, #map {
   background-color:white;
 }
 
+#state {
+  line-height:20px;
+  font-size:14px;
+  padding-left:10px;
+}
+
+#layout {
+  width:200px;
+  margin-left:10px;
+}
+
 #score {
-  display:block;
+  display:inline;
   font-size: 24px;
   font-weight:bold;
+  float: left;
+}
+
+#timer {
+  display:inline;
+  font-size: 24px;
+  font-weight:bold;
+  float: right;
 }
 
 #info {

@@ -13,6 +13,8 @@ body
     script(src="/js/quiz.js",type="text/javascript")
     div#panel
       h2 US States Quiz
-      input#state(type="text",onkeyup="stateChange()")
-      div#score
+      input#state(type="text",onkeyup="stateChange()",placeholder="state name")
+      div#layout
+        div#score
+        div#timer
       div#info
