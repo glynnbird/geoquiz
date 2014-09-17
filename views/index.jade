@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+head
+  title US States Quiz
+  meta(charset="utf-8")
+  meta(name="viewport",content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+  link(rel="stylesheet",href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css")
+  link(rel="stylesheet",href="/css/quiz.css")
+  script(src="//code.jquery.com/jquery-1.11.0.min.js")
+body
+  body#map
+    script(src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js")
+    script(src="/js/quiz.js",type="text/javascript")
+    div#panel
+      h2 US States Quiz
+      input#state(type="text",onkeyup="stateChange()")
+      div#score
