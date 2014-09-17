@@ -11,8 +11,8 @@ html, body, #map {
   position:absolute;
   top:300px;
   left: 50px;
-  width:200px;
-  height:300px;
+  width:250px;
+  height:350px;
   border:2px solid #666;
   padding:10px;
   box-shadow: 5px 5px 2px #888888;
@@ -22,4 +22,8 @@ html, body, #map {
 #score {
   display:block;
   font-size: 24px;
+}
+
+#info {
+  margin-left:15px;
 }

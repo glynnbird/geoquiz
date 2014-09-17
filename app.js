@@ -21,12 +21,6 @@ app.get('/', function(req, res){
   res.render('index',{ });
 });
 
-app.get("/api/add", function(req,res) {
-});
-
-app.get("/api/recent", function(req,res) {
-});
-
 // The IP address of the Cloud Foundry DEA (Droplet Execution Agent) that hosts this application:
 var host = (process.env.VCAP_APP_HOST || 'localhost');
 // The port on the DEA for communication with the application:

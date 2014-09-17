@@ -76,6 +76,8 @@ var renderState = function(state) {
           success: function(data) {
             data = JSON.parse(data);
             renderGeoJSON(data, fancyStyle);
+            console.log(data.properties);
+            $('#info').html("<pre>" + JSON.stringify(data.properties, null, " ") + "</pre>")
           }
         });  
 }
