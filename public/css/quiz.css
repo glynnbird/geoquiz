@@ -12,16 +12,22 @@ html, body, #map {
   top:200px;
   left: 50px;
   width:250px;
-  height:350px;
-  border:2px solid #666;
+  height:375px;
+  border:1px solid #666;
   padding:10px;
-  box-shadow: 5px 5px 2px #888888;
   background-color:white;
+}
+
+h2 {
+  margin-left:10px;
+  font-size:26px;
+  margin-bottom:10px;
 }
 
 #state {
   line-height:20px;
   font-size:14px;
+  margin-left:10px;
   padding-left:10px;
 }
 
