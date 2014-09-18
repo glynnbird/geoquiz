@@ -9,7 +9,7 @@ html, body, #map {
 
 #panel {
   position:absolute;
-  top:300px;
+  top:200px;
   left: 50px;
   width:250px;
   height:350px;
@@ -51,4 +51,8 @@ html, body, #map {
 th { 
   text-align: right;
   padding-right:10px;
+}
+
+.leaflet-container {
+    background: #00bbff;
 }

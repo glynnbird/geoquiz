@@ -8,13 +8,9 @@
 var express = require('express');
 // setup middleware
 var app = express();
-var server = require('http').Server(app);
-//app.use(app.router);
-//app.use(express.errorHandler());
 app.use(express.static(__dirname + '/public')); //setup static public directory
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views'); //optional since express defaults to CWD/views
-
 
 // render index page
 app.get('/', function(req, res){
@@ -26,7 +22,7 @@ var host = (process.env.VCAP_APP_HOST || 'localhost');
 // The port on the DEA for communication with the application:
 var port = (process.env.VCAP_APP_PORT || 3000);
 // Start server
-server.listen(port, host);
+app.listen(port, host);
 console.log('App started on port ' + port);
 
 

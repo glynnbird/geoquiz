@@ -17,34 +17,24 @@ var options = {
 }
 var map = L.map('map', options).setView([43.74739, -105], zoomLevel);
 
-/*
-L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-	maxZoom: 18,
-	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-		'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-		'Imagery © <a href="http://mapbox.com">Mapbox</a>'
-}).addTo(map);*/
-
 var greyStyle = {
-    "color": "#aaaaaa",
-    "weight": 1,
-    "opacity": 1
-};
-
-var plainStyle = {
-    "color": "#0000cc",
-    "weight": 1,
-    "opacity": 0.4
+    color: "#666",
+    fillColor: "#66bb66",
+    fillOpacity: 0.5,
+    weight: 1,
+    opacity: 1
 };
 
 var fancyStyle = {
-  color: "#1188ee",
+  color: "#ff8888",
   weight: 3,
-  opacity: 0.6
-}
+  opacity: 0.6,
+  fillOpacity: 0.5,
+};
 
-var renderGeoJSON = function(obj,style) {
-  L.geoJson(obj, {style: style} ).addTo(map);
+var renderGeoJSON = function(obj,style, label) {
+  var opts = {style: style}
+  L.geoJson(obj, opts).addTo(map);
 };
 
 $.ajax({url: "/js/world.json",
@@ -80,10 +70,8 @@ var renderState = function(state) {
   $.ajax({url: "https://reader.cloudant.com/usstates/" + encodeURIComponent(state),
           success: function(data) {
             data = JSON.parse(data);
-            renderGeoJSON(data, fancyStyle);
-            console.log(data.properties);
+            renderGeoJSON(data, fancyStyle, data.properties.abbreviation);
             $("#info").html(jsonToTable(data.properties));
-    //        $('#info').html("<pre>" + JSON.stringify(data.properties, null, " ") + "</pre>")
           }
         });  
 }
@@ -107,10 +95,10 @@ var checkState = function(s) {
       renderState(s);
       $('#state').val("");
       renderScore();
-    }
-    if (mystates.length == Object.keys(states).length) {
-      stopTimer();
-      alert("Quiz complete");
+      if (mystates.length == Object.keys(states).length) {
+        stopTimer();
+        alert("Quiz complete");
+      }
     }
   }
 }
@@ -143,7 +131,6 @@ var stopTimer = function() {
 };
 
 var stateChange = function() {
-  //console.log("!!!");
   checkState($('#state').val())
 };
 
