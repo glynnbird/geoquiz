@@ -60,5 +60,5 @@ th {
 }
 
 .leaflet-container {
-    background: #00bbff;
+    background: #00bbff url(/img/wave.png) repeat;
 }

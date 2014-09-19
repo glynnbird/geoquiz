@@ -20,7 +20,7 @@ var map = L.map('map', options).setView([43.74739, -105], zoomLevel);
 var greyStyle = {
     color: "#666",
     fillColor: "#66bb66",
-    fillOpacity: 0.5,
+    fillOpacity: 1.0,
     weight: 1,
     opacity: 1
 };
