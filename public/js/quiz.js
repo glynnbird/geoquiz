@@ -45,7 +45,7 @@ $.ajax({url: "/js/world.json",
       });
       
 var fetchStateNames = function() {
-  $.ajax({url: "https://reader.cloudant.com/usstates/_design/fetch/_view/byName",
+  $.ajax({url: "/proxy/usstates/_design/fetch/_view/byName",
           success: function(data) {
             data = JSON.parse(data);
             for(var i in data.rows) {
@@ -67,7 +67,7 @@ var jsonToTable = function(d) {
       
       
 var renderState = function(state) {
-  $.ajax({url: "https://reader.cloudant.com/usstates/" + encodeURIComponent(state),
+  $.ajax({url: "/proxy/usstates/" + encodeURIComponent(state),
           success: function(data) {
             data = JSON.parse(data);
             renderGeoJSON(data, fancyStyle, data.properties.abbreviation);
