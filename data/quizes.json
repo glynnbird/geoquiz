@@ -13,10 +13,19 @@
       "type": "Quiz",
       "name": "English Counties Quiz",
       "group": "UK Counties",
-      "description": "Identify all 27 English counties from a blank map of the UK. Does not include English metropolitan areas or any of Wales, Northern Island or Scotlans.",
-      "latitude": 52,
-      "longitude": 1.0,
+      "description": "Identify all 27 English counties from a blank map of the UK. Does not include English metropolitan areas or any of Wales, Northern Island or Scotland.",
+      "latitude": 54,
+      "longitude": -3,
       "zoom": 5
+    },
+    {
+      "type": "Quiz",
+      "name": "Countries of the World Quiz",
+      "group": "Countries",
+      "description": "Identify the World's countries.",
+      "latitude": 20,
+      "longitude": 0,
+      "zoom": 2
     }      
   ]
 }

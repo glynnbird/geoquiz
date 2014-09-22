@@ -11,7 +11,7 @@ var express = require('express'),
 app.use(express.static(__dirname + '/public')); //setup static public directory
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views'); //optional since express defaults to CWD/views
-app.use(proxy('proxy', "https://reader.cloudant.com"));
+app.use(proxy('proxy', process.env.COUCH_URL));
 
 // render index page
 app.get('/', function(req, res){

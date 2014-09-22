@@ -12,9 +12,7 @@ var options = {
   touchZoom: false,
   scollWheelZoom: false,
   doubleClickZoom: false,
-  boxZoom: false,
-  minZoom: zoomLevel,
-  maxZoom: zoomLevel
+  boxZoom: false
 }
 
 // land styling
@@ -47,36 +45,14 @@ var renderGeoJSON = function(obj, style, label) {
   }
   L.geoJson(obj, opts).addTo(map);
 };
-
-// load the state names from Cloudant      
-var fetchStateNames = function() {
-  $.ajax({url: "/proxy/usstates/_design/fetch/_view/byName",
-          success: function(data) {
-            data = JSON.parse(data);
-            for(var i in data.rows) {
-              states[data.rows[i].id] = data.rows[i].key;
-            }
-          }
-        });   
-} ;     
-      
-// render a JSON object as a table of key/values      
-var jsonToTable = function(d) {
-  var table = "<table>";
-  for(var i in d) {
-    table += "<tr><th>" + i + "</th><td>" + d[i] + "</td></tr>";
-  }
-  table += "</table>";
-  return table;
-};      
+          
       
 // given a state name, load it's GeoJSON from Cloudant and render it      
 var renderState = function(state) {
-  $.ajax({url: "/proxy/usstates/" + encodeURIComponent(state),
+  $.ajax({url: "/proxy/geoquiz/" + encodeURIComponent(state),
           success: function(data) {
             data = JSON.parse(data);
             renderGeoJSON(data, fancyStyle, data.properties.name);
-            $("#info").html(jsonToTable(data.properties));
           }
         });  
 }
@@ -169,6 +145,64 @@ var stateChange = function() {
 };
 
 
+var renderQuizList = function() {
+  quizes.forEach(function(q) {
+  });
+}
+
+var startQuiz = function(quiz) {
+  states = { };
+  mystates = [];
+  elapsed = 0;
+  
+  // move the map view
+  map.setView([quiz.latitude, quiz.longitude], quiz.zoom);
+  
+  // load the state names from Cloudant      
+  $.ajax({ url: "/proxy/geoquiz/_design/fetch/_view/byGroup",
+           data : { key: "\"" + quiz.group + "\"",
+                    reduce: "false"
+                  },
+          success: function(data) {
+            data = JSON.parse(data);
+            console.log(data);
+            for(var i in data.rows) {
+              states[data.rows[i].id] = data.rows[i].value;
+            }
+          }
+        });   
+}
+
+var quizChange = function() {
+  var id = $('#quiz').val();
+  if (id.length > 0) {
+    $.ajax({ url: "/proxy/geoquiz/" + encodeURIComponent(id),
+             data: { include_docs: "true"},
+             success: function(data) {
+               data = JSON.parse(data);
+               startQuiz(data);
+            }
+          });  
+  }
+};
+
+// fetch a list of quizes
+var fetchQuizes = function() {
+
+  $.ajax({ url: "/proxy/geoquiz/_design/fetch/_view/byType",
+           data: { include_docs: "true", key: "\"Quiz\"", reduce: "false"},
+           success: function(data) {
+             data = JSON.parse(data);
+             data.rows.forEach(function(d) {
+               d = d.doc;
+               console.log(d._id,d.name);  
+               $('#quiz').append('<option value="' + d._id + '">' + d.name + '</option>');
+             });
+          }
+        });  
+};
+
+
 // onload
 $(window).load(function() {
   // render the world
@@ -178,7 +212,8 @@ $(window).load(function() {
           }
         });
 
-  fetchStateNames();
+  fetchQuizes();
+
 });
 
       
