@@ -1,0 +1,22 @@
+{ 
+  "docs": [
+    {
+      "type": "Quiz",
+      "name": "US States Quiz",
+      "group": "US States",
+      "description": "Identify all 50 US states from a blank map of the USA",
+      "latitude": 43.74739,
+      "longitude": -105.0,
+      "zoom": 4
+    },
+    {
+      "type": "Quiz",
+      "name": "English Counties Quiz",
+      "group": "UK Counties",
+      "description": "Identify all 27 English counties from a blank map of the UK. Does not include English metropolitan areas or any of Wales, Northern Island or Scotlans.",
+      "latitude": 52,
+      "longitude": 1.0,
+      "zoom": 5
+    }      
+  ]
+}
