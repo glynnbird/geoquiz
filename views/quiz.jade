@@ -1,0 +1,36 @@
+doctype html
+html(lang="en")
+head
+  title GeoQuiz
+  meta(charset="utf-8")
+  meta(name="viewport",content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+  script(src="//code.jquery.com/jquery-1.11.0.min.js")
+  link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css")
+  link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css")
+  script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")
+  link(rel="stylesheet",href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css")
+  link(rel="stylesheet",href="/css/quiz.css")
+body#map
+  nav.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
+    div.container-fluid
+      div.navbar-header
+        a.navbar-brand(href="/") GeoQuiz
+      p#title.navbar-text  
+      form.navbar-form.navbar-left
+        input#state.form-control(type="text", onkeyup="stateChange()", placeholder="place name")
+      p.navbar-text
+        span#livescore.label.label-success 0
+      p.navbar-text
+        span#livetimer.label.label-default 00:00
+      form.navbar-form.navbar-left
+        button.btn.btn-danger(type="button",href="Javasript:giveUp()") Stop&nbsp;
+          span.glyphicon.glyphicon-stop
+
+  script(src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js")
+  script(src="/js/quiz.js",type="text/javascript")
+
+    
+
+
+    
+      

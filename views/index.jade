@@ -1,37 +1,42 @@
 doctype html
 html(lang="en")
 head
-  title US States Quiz
+  title Geo Quiz
   meta(charset="utf-8")
   meta(name="viewport",content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
-  link(rel="stylesheet",href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css")
-  link(rel="stylesheet",href="/css/quiz.css")
+  meta(http-equiv="X-UA-Compatible",content="IE=edge")
   script(src="//code.jquery.com/jquery-1.11.0.min.js")
+  link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css")
+  link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css")
+  script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")
+  script(src="/js/index.js",type="text/javascript")
 body
-  body#map
-    a(href="https://github.com/glynnbird/usstatesquiz")
-      img#forkme(style="position: absolute; top: 0; right: 0; border: 0", src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67", alt="Fork me on GitHub", data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png")
-  
-    script(src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js")
-    script(src="/js/quiz.js",type="text/javascript")
-    div#panel1.panel
-      h2 GEO Quiz
-      div Please choose the quiz you would like to attempt ...
-      select#quiz(onchange="quizChange()")
-        option(value="") -- choose quiz --
+  a(href="https://github.com/glynnbird/usstatesquiz")
+    img#forkme(style="position: absolute; top: 0; right: 0; border: 0", src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67", alt="Fork me on GitHub", data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png")
+  div.container
+    div.header
+      h3.text-muted GeoQuiz
       
-    div#panel2.panel  
-      h2#panel2title Quiz title
-      input#state(type="text",onkeyup="stateChange()",placeholder="state name")
-      div.layout
-        div#livescore.score
-        div#livetimer.timer
-      div.break
-        a(href="Javasript:giveUp()") Give Up
+    div.jumbotron
+      h1 GeoQuiz
+        p.lead Test your Geographical knowledge by identifying countries, counties and states against the clock. 
+          | Choose a quiz from the list below to get started
+        p
+          select#quiz(onchange="quizChange()")
+            option(value="") -- choose quiz --
       
-    div#panel3.panel
-      h2 Well Done
-      div You got
-      div.layout
-        div#summaryscore.score
-        div#summarytimer.timer
+
+    div.row.marketing
+      div.col-lg-12
+        h4 What is this?
+        p This application was put together to demonstrate a web application interfacing with Cloudant. It is built with 
+        ul
+          li Node.js
+          li Leaflet
+          li jQuery
+        
+        p Read more about it on Github.
+
+        div.footer
+      p &copy; Company 2014
+      

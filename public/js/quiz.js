@@ -163,9 +163,9 @@ var startQuiz = function(quiz) {
   mystates = [];
   elapsed = 0;
   
-  $('#panel1').hide();
-  $('#panel2').show();
-  $('#panel3').hide();
+  // set titles
+  $('#title').html(quiz.name);
+  document.title = quiz.name;
   
   // remove old layers
   layers.forEach(function(l) {
@@ -183,39 +183,20 @@ var startQuiz = function(quiz) {
                   },
           success: function(data) {
             data = JSON.parse(data);
-            console.log(data);
             for(var i in data.rows) {
               states[data.rows[i].id] = data.rows[i].value;
             }
+            renderScore();
           }
         });   
 }
 
-var quizChange = function() {
-  var id = $('#quiz').val();
-  if (id.length > 0) {
-    $.ajax({ url: "/proxy/geoquiz/" + encodeURIComponent(id),
-             data: { include_docs: "true"},
-             success: function(data) {
-               data = JSON.parse(data);
-               startQuiz(data);
-            }
-          });  
-  }
-};
-
-// fetch a list of quizes
-var fetchQuizes = function() {
-
-  $.ajax({ url: "/proxy/geoquiz/_design/fetch/_view/byType",
-           data: { include_docs: "true", key: "\"Quiz\"", reduce: "false"},
+var loadQuiz = function(quiz_id) {
+  $.ajax({ url: "/proxy/geoquiz/" + encodeURIComponent(quiz_id),
+           data: { include_docs: "true"},
            success: function(data) {
              data = JSON.parse(data);
-             data.rows.forEach(function(d) {
-               d = d.doc;
-               console.log(d._id,d.name);  
-               $('#quiz').append('<option value="' + d._id + '">' + d.name + '</option>');
-             });
+             startQuiz(data);
           }
         });  
 };
@@ -223,20 +204,22 @@ var fetchQuizes = function() {
 
 // onload
 $(window).load(function() {
+  
+  // extract quizid from the path
+  var match = window.location.pathname.match(/^\/quiz\/(.+)$/);
+  if (match) {
+    quiz_id = match[1];
+  }
+  
   // render the world
-  $('#panel2').hide();
-  $('#panel3').hide();
   $.ajax({url: "/js/world.json",
           success: function(data) {
             renderGeoJSON(data, greenStyle);
+            
+            // then load the quiz
+            loadQuiz(quiz_id);
           }
         });
 
-  fetchQuizes();
-
 });
-
-$('#panel2').hide();
-$('#panel3').hide();
-      
 
