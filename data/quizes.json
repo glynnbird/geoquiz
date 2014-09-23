@@ -26,6 +26,15 @@
       "latitude": 20,
       "longitude": 0,
       "zoom": 2
+    },
+    {
+      "type": "Quiz",
+      "name": "Shipping Forecast Quiz",
+      "group": "Shipping Forecast",
+      "description": "Identify all 31 Shipping Forecast zones, as heard on BBC Radio 4.",
+      "latitude": 54,
+      "longitude": -3,
+      "zoom": 4
     }      
   ]
 }

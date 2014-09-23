@@ -1,6 +1,7 @@
 var zoomLevel = 4;
 var states = { };
 var mystates = [];
+var layers = [ ]
 var started= false;
 var elapsed = 0;
 var timer = null;
@@ -40,10 +41,17 @@ var renderGeoJSON = function(obj, style, label) {
   var opts = {
     style: style,
     onEachFeature: function(feature, layer) {
-      layer.bindPopup(label);
+      if (typeof label == "string" && label.length >0) {
+        layer.bindPopup(label); 
+             
+      }
     }
   }
-  L.geoJson(obj, opts).addTo(map);
+  var l = L.geoJson(obj, opts).addTo(map);
+  if(typeof label == "string") {
+    layers.push( l );
+  }
+
 };
           
       
@@ -59,7 +67,7 @@ var renderState = function(state) {
 
 // show the current score e.g 4/50
 var renderScore = function() {
-  $('#score').html(mystates.length + " / " + Object.keys(states).length);
+  $('#livescore').html(mystates.length + " / " + Object.keys(states).length);
 }
 
 // check if state 's' is in our list
@@ -112,7 +120,7 @@ var pad = function(num, size) {
 var renderTimer  = function() {
   var s = elapsed % 60;
   var m = Math.floor(elapsed / 60);
-  $('#timer').html(pad(m,2)+":"+pad(s,2));
+  $('#livetimer').html(pad(m,2)+":"+pad(s,2));
 }
 
 
@@ -154,6 +162,16 @@ var startQuiz = function(quiz) {
   states = { };
   mystates = [];
   elapsed = 0;
+  
+  $('#panel1').hide();
+  $('#panel2').show();
+  $('#panel3').hide();
+  
+  // remove old layers
+  layers.forEach(function(l) {
+    map.removeLayer(l);
+  });
+  layers = [ ];
   
   // move the map view
   map.setView([quiz.latitude, quiz.longitude], quiz.zoom);
@@ -206,6 +224,8 @@ var fetchQuizes = function() {
 // onload
 $(window).load(function() {
   // render the world
+  $('#panel2').hide();
+  $('#panel3').hide();
   $.ajax({url: "/js/world.json",
           success: function(data) {
             renderGeoJSON(data, greenStyle);
@@ -216,6 +236,7 @@ $(window).load(function() {
 
 });
 
-      
+$('#panel2').hide();
+$('#panel3').hide();
       
 

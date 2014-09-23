@@ -7,6 +7,7 @@ echo "Adding the geographic data"
 ccurl -X POST -d @us.json /geoquiz/_bulk_docs
 ccurl -X POST -d @uk.json /geoquiz/_bulk_docs
 ccurl -X POST -d @countries.json /geoquiz/_bulk_docs
+ccurl -X POST -d @shippingforecast.json /geoquiz/_bulk_docs
 
 echo "Adding the quizes"
 ccurl -X POST -d @quizes.json /geoquiz/_bulk_docs

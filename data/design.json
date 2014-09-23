@@ -7,8 +7,12 @@
                 "map": "function(doc) {\n  if (typeof doc.properties =='object') { emit(doc.properties.name, null); }\n}"
             },
             "byType": {
-              "map": "function(doc) {\n  emit(doc.type, 1)\n}",
-              "reduce": "_count"
+                "map": "function(doc) {\n  emit(doc.type, 1)\n}",
+                "reduce": "_count"
+            },
+            "byGroup": {
+                "reduce": "_count",
+                "map": "function(doc) {\n  if (doc.type == \"Feature\" && typeof doc.properties == \"object\") {\n      emit(doc.properties.group, 1);\n  }\n}"
             }
         },
         "language": "javascript"

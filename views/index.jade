@@ -14,13 +14,24 @@ body
   
     script(src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js")
     script(src="/js/quiz.js",type="text/javascript")
-    div#panel
+    div#panel1.panel
       h2 GEO Quiz
+      div Please choose the quiz you would like to attempt ...
       select#quiz(onchange="quizChange()")
         option(value="") -- choose quiz --
-      br
+      
+    div#panel2.panel  
+      h2#panel2title Quiz title
       input#state(type="text",onkeyup="stateChange()",placeholder="state name")
-      input#giveup(type="button",value="Give Up")
-      div#layout
-        div#score
-        div#timer
+      div.layout
+        div#livescore.score
+        div#livetimer.timer
+      div.break
+        a(href="Javasript:giveUp()") Give Up
+      
+    div#panel3.panel
+      h2 Well Done
+      div You got
+      div.layout
+        div#summaryscore.score
+        div#summarytimer.timer

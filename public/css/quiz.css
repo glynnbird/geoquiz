@@ -7,7 +7,7 @@ html, body, #map {
    width: 100%;
 }
 
-#panel {
+.panel {
   position:absolute;
   top:200px;
   left: 50px;
@@ -31,27 +31,27 @@ h2 {
   padding-left:10px;
 }
 
-#layout {
+.layout {
   width:200px;
   margin-left:10px;
 }
 
-#score {
+.score {
   display:inline;
   font-size: 24px;
   font-weight:bold;
   float: left;
 }
 
-#timer {
+.timer {
   display:inline;
   font-size: 24px;
   font-weight:bold;
   float: right;
 }
 
-#info {
-  margin-left:15px;
+.clear {
+  clear: both;
 }
 
 th { 
