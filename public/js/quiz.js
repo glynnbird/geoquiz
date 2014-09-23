@@ -1,4 +1,3 @@
-var zoomLevel = 4;
 var states = { };
 var mystates = [];
 var layers = [ ]
@@ -34,7 +33,7 @@ var fancyStyle = {
 };
 
 // generate a map
-var map = L.map('map', options).setView([43.74739, -105], zoomLevel);
+var map = L.map('map', options).setView([0, 0], 2);
 
 // render a GeoJSON object on the map
 var renderGeoJSON = function(obj, style, label) {
