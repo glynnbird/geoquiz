@@ -8,7 +8,7 @@ var timer = null;
 // leaflet map options
 var options = {
   zoomControl: false,
-  dragging: false,
+  dragging: true,
   touchZoom: false,
   scollWheelZoom: false,
   doubleClickZoom: false,

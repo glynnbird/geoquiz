@@ -19,3 +19,44 @@ The data comes from
 ## Screenshot
 ![screenshot](https://github.com/glynnbird/usstatesquiz/raw/master/public/img/s1.png "Screenshot")
 
+## Data Model
+
+There are two types of documents
+
+* type: “Quiz” - stores the name of the quiz, its position on the map and its zoom level
+* type: “Feature”  - GeoJSON storing the properties and geometry of a geographical area
+
+### type: “Quiz”
+
+Stores a document for each quiz and some configuration on where the map should be positioned.
+
+```
+{
+    "_id": "e3f4e3f4e3f4e3f4e3f4",
+    "type": "Quiz",
+    "name": "English Counties",
+    "description": "Identify 27 English Counties,....",
+    "latitude": 54.4,
+    "longitude": -1.1,
+    "zoom": 8
+}
+```
+
+### type: “Feature”
+
+One document per geographical feature, storing the properties of the place and the coordinates which describe its outline as arrays of coordinates. Each document is a GeoJSON feature, making it easy to render on a map. The “properties.quiz” string denotes which quiz the geographical shape belongs to e.g. “US States”.
+
+```
+{
+    "_id": "alabama",
+    "type": "Feature",
+    "properties": {
+        "quiz": "US States",
+        "name": "Alabama",
+        "abbreviation": "AL",
+        "capital": "Montgomery",
+        ...
+    },
+    "geometry": { … }
+}
+```
