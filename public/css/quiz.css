@@ -3,11 +3,11 @@ html,body {
 }
 
 body {
-  margin-top:54px;
+  margin-top:53px;
 }
 
 #map {
-   height: calc(100% - 54px);
+   height: calc(100% - 53px);
    width: 100%;
 }
 #spacer {
