@@ -11,7 +11,7 @@ head
   script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js")
   script(src="/js/index.js",type="text/javascript")
 body
-  a(href="https://github.com/glynnbird/usstatesquiz")
+  a(href="https://github.com/glynnbird/geoquiz")
     img#forkme(style="position: absolute; top: 0; right: 0; border: 0", src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67", alt="Fork me on GitHub", data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png")
   div.container
     div.header
@@ -23,6 +23,10 @@ body
       p 
         select#quiz(onchange="quizChange()")
           option(value="") -- choose quiz --
+          option(value="usstates") US States Quiz
+          option(value="englishcounties") English Counties Quiz
+          option(value="worldcountries") World Countries Quiz
+          option(value="shippingforecast") Shipping Forecast Quiz
       
     div.row
       div.col-lg-6
@@ -47,17 +51,21 @@ body
           
           div.carousel-inner
             div.item.active
-              img.img-responsive(src="/img/s1.png", alt="US States Quiz")
-              div.carousel-caption US States Quiz
+              a(href="/quiz/usstates")
+                img.img-responsive(src="/img/s1.png", alt="US States Quiz")
+                div.carousel-caption US States Quiz
             div.item
-              img.img-responsive(src="/img/s2.png", alt="English Counties Quiz")
-              div.carousel-caption English Counties Quiz
+              a(href="/quiz/englishcounties")
+                img.img-responsive(src="/img/s2.png", alt="English Counties Quiz")
+                div.carousel-caption English Counties Quiz
             div.item
-              img.img-responsive(src="/img/s3.png", alt="World Countries Quiz")
-              div.carousel-caption World Countries Quiz
+              a(href="/quiz/worldcountries")
+                img.img-responsive(src="/img/s3.png", alt="World Countries Quiz")
+                div.carousel-caption World Countries Quiz
             div.item
-              img.img-responsive(src="/img/s4.png", alt="Shipping Forecast")
-              div.carousel-caption Shipping Forecast Quiz
+              a(href="/quiz/shippingforecast")
+                img.img-responsive(src="/img/s4.png", alt="Shipping Forecast")
+                div.carousel-caption Shipping Forecast Quiz
       div.col-lg-3
 
     div.footer

@@ -176,13 +176,14 @@ var startQuiz = function(quiz) {
   map.setView([quiz.latitude, quiz.longitude], quiz.zoom);
   
   // load the state names from Cloudant      
-  $.ajax({ url: "/proxy/geoquiz/_design/fetch/_view/byGroup",
-           data : { key: "\"" + quiz.group + "\"",
+  $.ajax({ url: "/proxy/geoquiz/_design/fetch/_view/byTypeGroup",
+           data : { key: JSON.stringify( ["Feature", quiz.group]),
                     reduce: "false"
                   },
           success: function(data) {
+            console.log(data);
             data = JSON.parse(data);
-            for(var i in data.rows) {
+            for (var i in data.rows) {
               states[data.rows[i].id] = data.rows[i].value;
             }
             renderScore();

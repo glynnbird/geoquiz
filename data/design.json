@@ -3,16 +3,9 @@
     {
         "_id": "_design/fetch",
         "views": {
-            "byName": {
-                "map": "function(doc) {\n  if (typeof doc.properties =='object') { emit(doc.properties.name, null); }\n}"
-            },
-            "byType": {
-                "map": "function(doc) {\n  emit(doc.type, 1)\n}",
+            "byTypeGroup": {
+                "map": "function(doc) {\n  if (typeof doc.type == \"string\") {\n   var group= null; var name=null;   if (doc.type == \"Feature\" && typeof doc.properties == \"object\") {\n      group = doc.properties.group;\n name= doc.properties.name; \n  }\n emit([doc.type, group], name);\n }\n }",
                 "reduce": "_count"
-            },
-            "byGroup": {
-                "reduce": "_count",
-                "map": "function(doc) {\n  if (doc.type == \"Feature\" && typeof doc.properties == \"object\") {\n      emit(doc.properties.group, 1);\n  }\n}"
             }
         },
         "language": "javascript"
