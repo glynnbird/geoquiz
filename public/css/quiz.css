@@ -1,6 +1,17 @@
-html, body, #map {
-   height: 100%;
+html,body {
+  height:100%;
+}
+
+body {
+  margin-top:54px;
+}
+
+#map {
+   height: calc(100% - 54px);
    width: 100%;
+}
+#spacer {
+  margin-right:10px;
 }
 
 #title {
