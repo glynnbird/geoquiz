@@ -60,3 +60,29 @@ One document per geographical feature, storing the properties of the place and t
     "geometry": { … }
 }
 ```
+
+## Installing
+
+Clone the repository and run
+
+```
+cd geoquiz
+npm install
+sudo npm install -g ccurl
+```
+
+Then import the data into Cloudant/CouchDB (by default geoquiz is looking for local CouchDB):
+
+```
+cd data
+./populate.sh
+```
+
+And run it
+
+```
+cd ..
+node app.js
+```
+
+And visit the App in your web browser at http://localhost:3000. Alternatively, the App is BlueMix ready. Simply sign up for an account, add a Node.js runtime and a Cloudant service and modify the manifest.yml accordingly.
