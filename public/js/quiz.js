@@ -235,23 +235,28 @@ var stopQuiz = function() {
       html += '<li class="list-group-item">' + states[i] + '</li>';
     });
     $('#youmissedlist').append(html);
-    
-    // update social media links
-    var markup = "I scored " + $('#finalscore').html() + " in " + $('#finaltime').html() + ' on the "' + $('#title').html() + '" at #GeoQuiz';
-    document.title = markup;
-    
-    // twitter share button
-    window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
-    
-    // facebook share button
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=700694686689593&version=v2.0";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
   }
+  
+  // update social media links
+  var markup = "I scored " + $('#finalscore').html() + " in " + $('#finaltime').html() + ' on the "' + $('#title').html() + '" at #GeoQuiz';
+  document.title = markup;
+  
+  // twitter share button
+  window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+  
+  // facebook share button
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=700694686689593&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  
+  // fill in block quote
+  $('#myquote').html('"' + markup + '"');
+  
+  // show the modal
   $('#myModal').modal('show');
 }
 
