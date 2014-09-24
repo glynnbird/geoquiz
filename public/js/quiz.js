@@ -190,6 +190,7 @@ var startQuiz = function(quiz) {
               states[data.rows[i].id] = data.rows[i].value;
             }
             renderScore();
+            $('#state').focus();
           }
         });   
 }
