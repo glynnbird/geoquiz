@@ -31,6 +31,10 @@ app.get('/quiz/:quizid', function(req, res){
   res.render('quiz', req.params);
 });
 
+app.use(function(req, res, next){
+  res.redirect("/");
+});
+
 // The IP address of the Cloud Foundry DEA (Droplet Execution Agent) that hosts this application:
 var host = (process.env.VCAP_APP_HOST || 'localhost');
 // The port on the DEA for communication with the application:

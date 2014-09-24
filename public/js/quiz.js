@@ -32,6 +32,10 @@ var fancyStyle = {
   fillOpacity: 0.5,
 };
 
+var neversubmit = function() {
+  return false;
+}
+
 // generate a map
 var map = L.map('map', options).setView([0, 0], 2);
 
@@ -201,6 +205,9 @@ var loadQuiz = function(quiz_id) {
            success: function(data) {
              data = JSON.parse(data);
              startQuiz(data);
+          },
+          error: function() {
+            location.href = "/";
           }
         });  
 };
@@ -258,13 +265,13 @@ $(window).load(function() {
     quiz_id = match[1];
   }
   
+  // then load the quiz
+  loadQuiz(quiz_id);
+  
   // render the world
   $.ajax({url: "/js/world.json",
           success: function(data) {
             renderGeoJSON(data, greenStyle);
-            
-            // then load the quiz
-            loadQuiz(quiz_id);
           }
         });
 

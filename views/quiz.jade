@@ -15,10 +15,10 @@ body
 
   nav.navbar.navbar-inverse.navbar-fixed-top(role="navigation")
     div.container-fluid
-      div.navbar-header.hidden-xs
+      div.navbar-header.hidden-xs.hidden-sm
         a.navbar-brand(href="/") GeoQuiz
       p#title.navbar-text  
-      form.navbar-form.navbar-left
+      form.navbar-form.navbar-left(onsubmit="return neversubmit();")
         input#state.form-control(type="text", onkeyup="stateChange()", placeholder="place name")
       p.navbar-text
         span#livescore.label.label-success 0
