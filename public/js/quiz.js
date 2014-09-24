@@ -188,7 +188,6 @@ var startQuiz = function(quiz) {
                     reduce: "false"
                   },
           success: function(data) {
-            console.log(data);
             data = JSON.parse(data);
             for (var i in data.rows) {
               states[data.rows[i].id] = data.rows[i].value;
