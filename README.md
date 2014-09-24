@@ -1,7 +1,21 @@
 # usstatesquiz
 
-A simple web app that renders a quiz where the contestant has to name all 50 states of the US. As the answers are typed, the shapes of the states are presented on a Leaflet map.
+A simple web app that renders a quiz where the contestant has to name a group of geographical features. It has 4 individual quizes
 
-The data comes from [https://github.com/glynnbird/usstatesgeojson](https://github.com/glynnbird/usstatesgeojson), with the data being stored in a Cloudant database.
+* states of the US
+* counties of England
+* countries of the world
+* shipping forecast regions
 
-![screenshot](https://github.com/glynnbird/usstatesquiz/raw/master/public/img/screenshot.png "Screenshot")
+As the answers are typed, the shapes of the states are presented on a Leaflet map.
+
+The data comes from
+
+* [https://github.com/glynnbird/usstatesgeojson](https://github.com/glynnbird/usstatesgeojson)
+* [https://github.com/glynnbird/ukcountiesgeojson](https://github.com/glynnbird/ukcountiesgeojson)
+* [https://github.com/glynnbird/countriesgeojson](https://github.com/glynnbird/countriesgeojson)
+* [https://github.com/glynnbird/shippingforecastgeojson](https://github.com/glynnbird/shippingforecastgeojson)
+
+## Screenshot
+![screenshot](https://github.com/glynnbird/usstatesquiz/raw/master/public/img/s1.png "Screenshot")
+
