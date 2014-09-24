@@ -63,7 +63,7 @@ One document per geographical feature, storing the properties of the place and t
 
 ## Installing
 
-Clone the repository and run
+Clone the repository and run:
 
 ```
 cd geoquiz
@@ -71,14 +71,15 @@ npm install
 sudo npm install -g ccurl
 ```
 
-Then import the data into Cloudant/CouchDB (by default geoquiz is looking for local CouchDB):
+Then import the data into Cloudant/CouchDB:
 
 ```
 cd data
+export COUCH_URL=""http://127.0.0.1:5984"
 ./populate.sh
 ```
 
-And run it
+And run it:
 
 ```
 cd ..
