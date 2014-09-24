@@ -66,7 +66,9 @@ var renderState = function(state) {
 
 // show the current score e.g 4/50
 var renderScore = function() {
-  $('#livescore').html(mystates.length + " / " + Object.keys(states).length);
+  var markup = mystates.length + " / " + Object.keys(states).length;
+  $('#livescore').html(markup);
+  $('#finalscore').html(markup)
 }
 
 // check if state 's' is in our list
@@ -101,8 +103,7 @@ var checkState = function(s) {
       
       // check for quiz complete
       if (mystates.length == Object.keys(states).length) {
-        stopTimer();
-        alert("Quiz complete");
+        stopQuiz();
       }
     }
   }
@@ -119,7 +120,9 @@ var pad = function(num, size) {
 var renderTimer  = function() {
   var s = elapsed % 60;
   var m = Math.floor(elapsed / 60);
-  $('#livetimer').html(pad(m,2)+":"+pad(s,2));
+  var markup = pad(m,2)+":"+pad(s,2);
+  $('#livetimer').html(markup);
+  $('#finaltime').html(markup);
 }
 
 
@@ -201,6 +204,49 @@ var loadQuiz = function(quiz_id) {
         });  
 };
 
+
+var stopQuiz = function() {
+  
+  // stop the clock
+  stopTimer();
+  
+  // kill the map
+  map.remove();
+  
+  // if quiz was won
+  if (Object.keys(states).length == mystates.length) {
+    $('#youmissed').hide();
+    $('#youmissedlist').hide();
+  } else {
+
+    // calculate what was missed
+    mystates.forEach(function(state) {
+      delete states[state];
+    });
+    var html = "";
+    Object.keys(states).forEach(function(i) {
+      html += '<li class="list-group-item">' + states[i] + '</li>';
+    });
+    $('#youmissedlist').append(html);
+    
+    // update social media links
+    var markup = "I scored " + $('#finalscore').html() + " in " + $('#finaltime').html() + ' on the "' + $('#title').html() + '" at #GeoQuiz';
+    document.title = markup;
+    
+    // twitter share button
+    window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+    
+    // facebook share button
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=700694686689593&version=v2.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  }
+  $('#myModal').modal('show');
+}
 
 // onload
 $(window).load(function() {

@@ -20,3 +20,9 @@ html, body, #map {
     background: #00bbff url(/img/wave.png) repeat;
 }
 
+#youmissedlist {
+  height:200px;
+  overflow:hidden; 
+  overflow-y:scroll;
+}
+
