@@ -15,7 +15,7 @@ body
         a.navbar-brand(href="/") GeoQuiz
       p#title.navbar-text  
       form.navbar-form.navbar-left(onsubmit="return neversubmit();")
-        input#state.form-control(type="text", onkeyup="stateChange()", placeholder="place name",disabled="true")
+        input#state.form-control(type="text", onkeyup="stateChange()", placeholder="place name",disabled="true",data-toggle="popover", data-title="Start here",data-trigger="manual", data-placement="bottom", data-content="Enter your first place name and the quiz will begin automatically.")
       p.navbar-text
         span#livescore.label.label-success 0
         span#spacer
@@ -64,7 +64,7 @@ body
           div.spacer
           p Close this box, then start typing your first answer to begin the quiz.
         div.modal-footer
-          button.btn.btn-primary(type="button",data-dismiss="modal") OK, Let's do this
+          button.btn.btn-primary(type="button",data-dismiss="modal",onclick="introdismiss()") OK, Let's do this
 
     
 

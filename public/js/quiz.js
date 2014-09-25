@@ -36,6 +36,14 @@ var neversubmit = function() {
   return false;
 }
 
+var introdismiss = function() {
+  setTimeout(function() {
+    $('#state').focus();
+    $('#state').popover("show");
+  },500);
+  
+}
+
 // generate a map
 var map = L.map('map', options).setView([0, 0], 2);
 
@@ -82,6 +90,7 @@ var checkState = function(s) {
     started = true;
     startTimer();
     $("#stopbutton").prop('disabled', false);
+    $('#state').popover("hide");
     
     // record that a quiz has been started in the database
     $.ajax({url: "/proxy/geoquiz_stats",
@@ -227,7 +236,6 @@ var startQuiz = function(quiz) {
             }
             renderScore();
             $("#state").prop('disabled', false);
-            $('#state').focus();
             quizdoc.outof = Object.keys(states).length;
           }
         });   
