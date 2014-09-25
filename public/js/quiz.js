@@ -97,8 +97,9 @@ var checkState = function(s) {
           });  
   }
   
-  // lowercase it
+  // lowercase it and trim it
   s = s.toLowerCase();
+  s = s.replace(/^ +/,"").replace(/ +$/,"");
   
   // check of existance in list of states
   var i = mystates.indexOf(s);
