@@ -179,6 +179,13 @@ var renderQuizList = function() {
 }
 
 var startQuiz = function(quiz) {
+  
+  // show the modal
+  $('#introtitle').html(quiz.name);
+  $('#introdescription').html(quiz.description);
+  $('#intro').modal('show');
+  
+  
   states = { };
   mystates = [];
   elapsed = 0;
