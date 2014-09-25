@@ -13,6 +13,7 @@ hash ccurl 2>/dev/null || { echo >&2 "Need 'ccurl' installed. Try 'sudo npm inst
 
 echo "Creating the database"
 ccurl -X PUT /geoquiz
+ccurl -X PUT /geoquiz_stats
 
 echo "Adding the geographic data"
 ccurl -X POST -d @us.json /geoquiz/_bulk_docs

@@ -81,6 +81,20 @@ var checkState = function(s) {
   if(!started) {
     started = true;
     startTimer();
+    $("#stopbutton").prop('disabled', false);
+    
+    // record that a quiz has been started in the database
+    $.ajax({url: "/proxy/geoquiz_stats",
+            method: "POST",
+            data: JSON.stringify(quizdoc), 
+            contentType: "application/json; charset=utf-8", 
+            dataType: "json",
+            success: function(data) {
+              // store the id + rev so we can update the stats at the end of the quiz
+              quizdoc._id = data.id;
+              quizdoc._rev = data.rev;
+            }           
+          });  
   }
   
   // lowercase it
@@ -168,7 +182,18 @@ var startQuiz = function(quiz) {
   states = { };
   mystates = [];
   elapsed = 0;
+  quizdoc = { };
   
+  // mark start of quiz
+  var now = moment().utc();
+  quizdoc.startdate = now.format("YYYY-MM-DD HH:mm:ss Z");
+  quizdoc.startts = now.unix();
+  quizdoc.enddate = null;
+  quizdoc.endts = null;
+  quizdoc.quiz_id = quiz._id;
+  quizdoc.name = quiz.name
+  quizdoc.score = null;
+
   // set titles
   $('#title').html(quiz.name);
   document.title = quiz.name;
@@ -193,7 +218,9 @@ var startQuiz = function(quiz) {
               states[data.rows[i].id] = data.rows[i].value;
             }
             renderScore();
+            $("#state").prop('disabled', false);
             $('#state').focus();
+            quizdoc.outof = Object.keys(states).length;
           }
         });   
 }
@@ -213,12 +240,26 @@ var loadQuiz = function(quiz_id) {
 
 
 var stopQuiz = function() {
+  // disable the stop button
+  $("#stopbutton").prop('disabled', true);
   
   // stop the clock
   stopTimer();
   
   // kill the map
   map.remove();
+  
+  // record that a quiz has been stopped in the database
+  var now = moment().utc();
+  quizdoc.endts = now.unix();
+  quizdoc.enddate = now.format("YYYY-MM-DD HH:mm:ss Z");
+  quizdoc.score = mystates.length;
+  $.ajax({url: "/proxy/geoquiz_stats",
+          method: "POST",
+          data: JSON.stringify(quizdoc), 
+          contentType: "application/json; charset=utf-8", 
+          dataType: "json"         
+        });  
   
   // if quiz was won
   if (Object.keys(states).length == mystates.length) {

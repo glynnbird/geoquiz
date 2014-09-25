@@ -2,6 +2,7 @@ doctype html
 html(lang="en")
 head
   include head.jade
+  script(src="/js/moment.js")
   link(rel="stylesheet",href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css")
   link(rel="stylesheet",href="/css/quiz.css")
 
@@ -14,14 +15,14 @@ body
         a.navbar-brand(href="/") GeoQuiz
       p#title.navbar-text  
       form.navbar-form.navbar-left(onsubmit="return neversubmit();")
-        input#state.form-control(type="text", onkeyup="stateChange()", placeholder="place name")
+        input#state.form-control(type="text", onkeyup="stateChange()", placeholder="place name",disabled="true")
       p.navbar-text
         span#livescore.label.label-success 0
         span#spacer
         span#livetimer.label.label-default 00:00
         span#spacer
       form.navbar-form.navbar-left
-        button.btn.btn-danger(type="button", onclick="stopQuiz()") Stop&nbsp;
+        button#stopbutton.btn.btn-danger(type="button", onclick="stopQuiz()",disabled="true") Stop&nbsp;
           span.glyphicon.glyphicon-stop
   div#map
   script(src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js")
