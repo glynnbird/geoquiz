@@ -36,7 +36,24 @@ var neversubmit = function() {
   return false;
 }
 
+var getCookie = function(key) {
+  var bits = document.cookie.split(";");
+  for(var i in bits) {
+    var kp = bits[i].split("=");
+    if(kp[0]== key) {
+      return kp[1];
+    }
+  }
+  return null;
+}
+
 var introdismiss = function() {
+  
+  // set a cookie to keep this user's initials for the next time
+  var initials = $('#initials').val();
+  document.cookie="initials="+initials+"; path=/";
+  console.log(getCookie("initials"));
+  
   setTimeout(function() {
     $('#state').focus();
     $('#state').popover("show");
@@ -70,7 +87,9 @@ var renderGeoJSON = function(obj, style, label) {
 var renderState = function(state) {
   $.ajax({url: "/proxy/geoquiz/" + encodeURIComponent(state),
           success: function(data) {
-            data = JSON.parse(data);
+            if (typeof data === 'string') {
+              data = JSON.parse(data);
+            }
             renderGeoJSON(data, fancyStyle, data.properties.name);
           }
         });  
@@ -190,6 +209,12 @@ var renderQuizList = function() {
 
 var startQuiz = function(quiz) {
   
+  // see if we have initials
+  var initials = getCookie("initials");
+  if(initials) {
+      $('#initials').val(initials)
+  }
+  
   // show the modal
   $('#introtitle').html(quiz.name);
   $('#introdescription').html(quiz.description);
@@ -230,7 +255,9 @@ var startQuiz = function(quiz) {
                     reduce: "false"
                   },
           success: function(data) {
-            data = JSON.parse(data);
+            if (typeof data === 'string') {
+              data = JSON.parse(data);
+            }
             for (var i in data.rows) {
               states[data.rows[i].id] = data.rows[i].value;
             }
@@ -245,7 +272,10 @@ var loadQuiz = function(quiz_id) {
   $.ajax({ url: "/proxy/geoquiz/" + encodeURIComponent(quiz_id),
            data: { include_docs: "true"},
            success: function(data) {
-             data = JSON.parse(data);
+             console.log(typeof data, data);
+             if (typeof data === 'string') {
+               data = JSON.parse(data);
+             }
              startQuiz(data);
           },
           error: function() {
@@ -270,6 +300,7 @@ var stopQuiz = function() {
   quizdoc.endts = now.unix();
   quizdoc.enddate = now.format("YYYY-MM-DD HH:mm:ss Z");
   quizdoc.score = mystates.length;
+  quizdoc.initials = getCookie("initials");
   $.ajax({url: "/proxy/geoquiz_stats",
           method: "POST",
           data: JSON.stringify(quizdoc), 

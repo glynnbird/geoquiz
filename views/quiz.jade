@@ -3,7 +3,7 @@ html(lang="en")
 head
   include head.jade
   script(src="/js/moment.js")
-  link(rel="stylesheet",href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css")
+  link(rel="stylesheet",href="/css/leaflet.css")
   link(rel="stylesheet",href="/css/quiz.css")
 
 body
@@ -25,7 +25,7 @@ body
         button#stopbutton.btn.btn-danger(type="button", onclick="stopQuiz()",disabled="true") Stop&nbsp;
           span.glyphicon.glyphicon-stop
   div#map
-  script(src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js")
+  script(src="/js/leaflet.js")
   script(src="/js/quiz.js",type="text/javascript")
  
   div#myModal.modal
@@ -63,6 +63,12 @@ body
           blockquote#introdescription
           div.spacer
           p Close this box, then start typing your first answer to begin the quiz.
+          div.spacer
+          form(role="form")
+            div.form-group
+              label.initials Enter your initials for the Leaderboard
+              input.form-control(type="email", id="initials", placeholder="e.g. GB",maxlength="2")
+          div.spacer
         div.modal-footer
           button.btn.btn-primary(type="button",data-dismiss="modal",onclick="introdismiss()") OK, Let's do this
 

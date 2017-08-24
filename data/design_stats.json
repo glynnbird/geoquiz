@@ -1,0 +1,13 @@
+{
+  "docs": [
+    {
+        "_id": "_design/fetch",
+        "views": {
+            "byLeader": {
+                "map": "function(doc) {\n  if (typeof doc.initials == \"string\") {\n   emit([doc.name, doc.outof - doc.score, doc.endts - doc.startts], doc.initials);  }\n }"
+            }
+        },
+        "language": "javascript"
+    }
+  ]
+}
